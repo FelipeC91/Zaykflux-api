@@ -10,19 +10,14 @@ public class Endereco {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
-
     private String cep;
-
     private String bairro;
     private String logradouro;
-
+    private String complemento;
     private Integer numero;
-
     @ManyToOne
     @JoinColumn(name = "cidade_id")
     private Cidade cidade;
-
-
     @ManyToOne
     @JoinColumn(name = "cliente_id")
     private Cliente cliente;

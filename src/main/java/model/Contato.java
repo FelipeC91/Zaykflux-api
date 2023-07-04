@@ -18,7 +18,6 @@ public class Contato {
     private String telefone;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "tipo_contato")
     private TipoContato tipoContato;
 
     @ManyToOne
@@ -38,7 +37,7 @@ public class Contato {
 
 
 
-
+    public Contato() {}
 
     public Contato(Long id, String nome, String email, String telefone, TipoContato tipoContato, Cliente cliente) {
         this.id = id;

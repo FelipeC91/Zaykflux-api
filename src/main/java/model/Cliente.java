@@ -35,11 +35,8 @@ public class Cliente {
 //
 
 
-
-
-
-
-
+    public Cliente() {
+    }
 
     public Cliente(Long id, Boolean ativo, String nomeFantasia, String razaoSocial, String cpfCnpj, String fotoUrl, List<Contato> contatos, List<Endereco> endereco) {
         this.id = id;
