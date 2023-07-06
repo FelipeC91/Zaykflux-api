@@ -1,14 +1,13 @@
-CREATE TABLE IF NOT EXISTS estado ENCODI (
-    id BIGINT PRIMARY KEY,
-    nome VARCHAR(50) ,
-    uf VARCHAR(2)
+CREATE TABLE IF NOT EXISTS estado (
+    uf VARCHAR(2) PRIMARY KEY,
+    nome VARCHAR(50)
 );
 
 CREATE TABLE IF NOT EXISTS cidade (
     id BIGINT PRIMARY KEY,
     nome VARCHAR(50) NOT NULL,
-    estado_id BIGINT NOT NULL,
-    FOREIGN KEY (estado_id) REFERENCES estado(id)
+    estado_id VARCHAR(2) NOT NULL,
+    FOREIGN KEY (estado_id) REFERENCES estado(uf)
 );
 
 CREATE TABLE IF NOT EXISTS endereco (

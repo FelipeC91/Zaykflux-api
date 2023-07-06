@@ -4,10 +4,12 @@ import dto.ClienteBasicInfoDTO;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
+import jakarta.ws.rs.core.Response;
 import model.Cliente;
 import repository.ClienteRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Path("/v1/clientes")
 public class ClienteController {
@@ -31,7 +33,19 @@ public class ClienteController {
 
     @GET
     @Path("/{id}")
-    public Cliente getClienteGeneralInfo(@PathParam("id") Long clienteId) {
-        return clienteRepository.findById(clienteId);
+    public Response getClienteGeneralInfo(@PathParam("id") Long clienteId) {
+        var clienteOptional = Optional.ofNullable(clienteRepository.findById(clienteId));
+
+        if (clienteOptional.isPresent()) {
+            return Response
+                    .status(Response.Status.ACCEPTED)
+                    .entity(clienteOptional.get())
+                    .build();
+
+        } else {
+            return Response
+                    .status(Response.Status.NOT_FOUND)
+                    .build();
+        }
     }
 }

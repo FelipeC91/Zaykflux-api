@@ -12,12 +12,10 @@ import java.util.Objects;
 public class Estado {
 
    @Id
-   @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private Long id;
+   private String uf;
 
     private String nome;
 
-    private String uf;
 
 
 
@@ -34,19 +32,12 @@ public class Estado {
 
     public Estado(){}
 
-    public Estado(Long id, String nome, String uf) {
-        this.id = id;
+    public Estado(String nome, String uf) {
+
         this.nome = nome;
         this.uf = uf;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getNome() {
         return nome;
@@ -69,11 +60,11 @@ public class Estado {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Estado estado = (Estado) o;
-        return Objects.equals(id, estado.id) && Objects.equals(nome, estado.nome) && Objects.equals(uf, estado.uf);
+        return Objects.equals(uf, estado.uf) && Objects.equals(nome, estado.nome);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, nome, uf);
+        return Objects.hash(uf);
     }
 }

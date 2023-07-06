@@ -20,6 +20,7 @@ public class Contato {
     private String telefone;
 
     @Enumerated(EnumType.STRING)
+    @Column(name = "tipo_contato")
     private TipoContato tipoContato;
 
     @JsonBackReference
