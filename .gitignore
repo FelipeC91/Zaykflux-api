@@ -41,3 +41,5 @@ nb-configuration.xml
 
 # Plugin directory
 /.quarkus/cli/plugins/
+
+V3.0.0__insert_clinete_cidade_endereco_estado.sql
