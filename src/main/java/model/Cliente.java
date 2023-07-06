@@ -1,7 +1,13 @@
 package model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonFilter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -14,19 +20,25 @@ public class Cliente {
 
     private Boolean ativo;
 
+    @Column(name = "nome_fantasia")
     private String nomeFantasia;
 
+    @Column(name = "razao_social")
     private String razaoSocial;
 
+    @Column(name = "cpf_cnpj")
     private String cpfCnpj;
 
+    @Column(name = "foto_url")
     private String fotoUrl;
 
+    @JsonManagedReference
     @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)
-    private List<Contato> contatos;
+    private List<Contato> contatos = new ArrayList<>();
+
 
     @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)
-    private List<Endereco> endereco;
+    private List<Endereco> endereco = new ArrayList<>();
 //
 //    private Usuario usuarioCliente;
 

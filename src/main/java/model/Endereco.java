@@ -1,5 +1,6 @@
 package model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.Objects;
@@ -18,6 +19,8 @@ public class Endereco {
     @ManyToOne
     @JoinColumn(name = "cidade_id")
     private Cidade cidade;
+
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "cliente_id")
     private Cliente cliente;
@@ -28,13 +31,15 @@ public class Endereco {
 
     public Endereco(){}
 
-    public Endereco(Long id, String cep, String bairro, String logradouro, Integer numero, Cidade cidade) {
+    public Endereco(Long id, String cep, String bairro, String logradouro, String complemento, Integer numero, Cidade cidade, Cliente cliente) {
         this.id = id;
         this.cep = cep;
         this.bairro = bairro;
         this.logradouro = logradouro;
+        this.complemento = complemento;
         this.numero = numero;
         this.cidade = cidade;
+        this.cliente = cliente;
     }
 
     public Long getId() {
@@ -69,6 +74,14 @@ public class Endereco {
         this.logradouro = logradouro;
     }
 
+    public String getComplemento() {
+        return complemento;
+    }
+
+    public void setComplemento(String complemento) {
+        this.complemento = complemento;
+    }
+
     public Integer getNumero() {
         return numero;
     }
@@ -83,6 +96,14 @@ public class Endereco {
 
     public void setCidade(Cidade cidade) {
         this.cidade = cidade;
+    }
+
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
     }
 
     @Override

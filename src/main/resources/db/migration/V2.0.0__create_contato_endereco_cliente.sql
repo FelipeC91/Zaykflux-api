@@ -5,7 +5,7 @@ CREATE TABLE IF NOT EXISTS cliente (
     razao_social VARCHAR(60) ,
     ativo BOOLEAN NOT NULL,
     cpf_cnpj VARCHAR(14) NOT NULL,
-    foto_uri VARCHAR(80)
+    foto_url VARCHAR(80)
 );
 
 

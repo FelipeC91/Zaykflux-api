@@ -1,5 +1,7 @@
 package model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.Objects;
@@ -20,8 +22,9 @@ public class Contato {
     @Enumerated(EnumType.STRING)
     private TipoContato tipoContato;
 
+    @JsonBackReference
     @ManyToOne
-    @JoinColumn(name = "client_id")
+    @JoinColumn(name = "cliente_id")
     private Cliente cliente;
 
 
