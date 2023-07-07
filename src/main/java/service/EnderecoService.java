@@ -15,6 +15,8 @@ public class EnderecoService {
 
     @Transactional
     public void save(Long clienteId, Endereco endereco) {
-       
+       var clienteOptional = clienteRepository.findByIdOptional(clienteId);
+
+
     }
 }

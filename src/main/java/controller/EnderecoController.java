@@ -12,7 +12,7 @@ import model.Endereco;
 import org.eclipse.microprofile.openapi.annotations.parameters.RequestBody;
 import service.EnderecoService;
 
-@Path("/clientes/{id}/enderecos")
+@Path("/v1/clientes/{id}/enderecos")
 public class EnderecoController {
 
     @Inject

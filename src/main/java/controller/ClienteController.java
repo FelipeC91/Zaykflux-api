@@ -1,15 +1,14 @@
 package controller;
 
+import com.fasterxml.jackson.databind.util.BeanUtil;
 import dto.ClienteBasicInfoDTO;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
-import model.Cliente;
 import repository.ClienteRepository;
 
 import java.util.List;
-import java.util.Optional;
 
 @Path("/v1/clientes")
 public class ClienteController {
@@ -34,7 +33,7 @@ public class ClienteController {
     @GET
     @Path("/{id}")
     public Response getClienteGeneralInfo(@PathParam("id") Long clienteId) {
-        var clienteOptional = Optional.ofNullable(clienteRepository.findById(clienteId));
+        var clienteOptional = clienteRepository.findByIdOptional(clienteId);
 
         if (clienteOptional.isPresent()) {
             return Response

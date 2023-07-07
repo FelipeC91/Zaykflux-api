@@ -11,7 +11,5 @@ public class ClienteService {
     @Inject
     ClienteRepository clienteRepository;
 
-    public Optional<Cliente> findByIdOptional(Long clienteId) {
-        return Optional.ofNullable(clienteRepository.findById(clienteId));
-    }
+
 }

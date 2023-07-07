@@ -4,9 +4,6 @@ import dto.ClienteBasicInfoDTO;
 import io.quarkus.hibernate.orm.panache.PanacheRepository;
 import io.quarkus.panache.common.Parameters;
 import jakarta.enterprise.context.ApplicationScoped;
-import jakarta.ws.rs.GET;
-import jakarta.ws.rs.Path;
-import jakarta.ws.rs.PathParam;
 import model.Cliente;
 
 import java.util.List;
