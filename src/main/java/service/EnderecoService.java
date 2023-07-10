@@ -4,7 +4,6 @@ import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
 import jakarta.ws.rs.core.UriInfo;
-import model.Cidade;
 import model.Endereco;
 import repository.CidadeRepository;
 import repository.ClienteRepository;

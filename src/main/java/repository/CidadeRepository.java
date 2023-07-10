@@ -2,8 +2,11 @@ package repository;
 
 import io.quarkus.hibernate.orm.panache.PanacheRepository;
 import io.quarkus.panache.common.Parameters;
+import jakarta.enterprise.context.ApplicationScoped;
 import model.Cidade;
 
+
+@ApplicationScoped
 public class CidadeRepository implements PanacheRepository<Cidade> {
 
     public Cidade findByNome(String nome) {
