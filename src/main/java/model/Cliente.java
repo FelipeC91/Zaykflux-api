@@ -1,10 +1,6 @@
 package model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonFilter;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
