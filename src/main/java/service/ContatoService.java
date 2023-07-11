@@ -2,6 +2,7 @@ package service;
 
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
+import jakarta.transaction.Transactional;
 import jakarta.ws.rs.core.UriInfo;
 import model.Contato;
 import repository.ClienteRepository;
@@ -20,21 +21,27 @@ public class ContatoService {
     @Inject
     ClienteRepository clienteRepository;
 
-    public void save(Long clienteId, Contato contato, UriInfo uriInfo) {
+    @Transactional
+    public Contato save(Long clienteId, Contato contato, UriInfo uriInfo) {
         var clienteOptional = clienteRepository.findByIdOptional(clienteId);
 
         if (clienteOptional.isEmpty())
             throw new ClienteNonExistentExeception("Cliente inexistente", uriInfo);
 
-       var contatoOptional = contatoRepository.findByEmailAndCliente(contato.getEmail(), clienteId);
+       var contatoOptional = contatoRepository. findByEmailAndCliente(contato.getEmail(), clienteId);
 
         if (contatoOptional.isPresent())
             throw new ContatoAlreadyLinkendWithCliente("Email de contato já vinculado a outro contato deste este cliente", uriInfo);
 
-        contatoOptional.get()
-                .setCliente( clienteOptional.get());
 
-        contatoRepository.persistAndFlush(contatoOptional.get());
+        contato.setCliente(clienteOptional.get());
+
+            contatoRepository.persistAndFlush(contato);
+
+
+
+        return contatoRepository.findByEmailAndCliente(contato.getEmail(), clienteId )
+                                    .get();
 
     }
 }

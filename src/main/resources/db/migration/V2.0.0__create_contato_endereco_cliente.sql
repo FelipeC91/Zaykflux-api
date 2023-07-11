@@ -1,8 +1,8 @@
 --CLIENTE
 CREATE TABLE IF NOT EXISTS cliente (
     id BIGINT PRIMARY KEY,
-    nome_fantasia VARCHAR(60) ,
-    razao_social VARCHAR(60) ,
+    nome_fantasia VARCHAR(60) NOT NULL,
+    razao_social VARCHAR(60) NOT NULL,
     ativo BOOLEAN NOT NULL,
     cpf_cnpj VARCHAR(14) NOT NULL,
     foto_url VARCHAR(80)
@@ -20,8 +20,8 @@ ALTER TABLE endereco
 --CONTATO
 CREATE TABLE IF NOT EXISTS contato (
     id BIGINT PRIMARY KEY,
-    nome VARCHAR(50) ,
-    email VARCHAR(50),
+    nome VARCHAR(50) NOT NULL,
+    email VARCHAR(50) NOT NULL,
     telefone VARCHAR(11),
     tipo_contato VARCHAR(11),
     cliente_id BIGINT,

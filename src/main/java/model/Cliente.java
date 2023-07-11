@@ -3,6 +3,9 @@ package model;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -16,12 +19,17 @@ public class Cliente {
 
     private Boolean ativo;
 
+    @NotNull(message = "Campo Nome Fantasia deve ser preenchido")
     @Column(name = "nome_fantasia")
     private String nomeFantasia;
+
+    @NotNull(message = "Campo Razão Social deve ser preenchido")
 
     @Column(name = "razao_social")
     private String razaoSocial;
 
+    @NotNull(message = "Campo CPF/CNPJ deve ser preenchido")
+    @Pattern(regexp = "\\d{11,14}", message = "Formato inválido de CPF/CNPJ")
     @Column(name = "cpf_cnpj")
     private String cpfCnpj;
 

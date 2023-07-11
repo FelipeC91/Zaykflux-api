@@ -3,6 +3,7 @@ package controller;
 
 import io.quarkus.panache.common.Parameters;
 import jakarta.inject.Inject;
+import jakarta.validation.Valid;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.*;
 import model.Endereco;
@@ -24,7 +25,7 @@ public class EnderecoController {
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response criarEndereco(@PathParam("id") Long clienteId, @RequestBody Endereco endereco, @Context UriInfo uriInfo) {
+    public Response criarEndereco(@PathParam("id") Long clienteId, @RequestBody @Valid Endereco endereco, @Context UriInfo uriInfo) {
 
         var enderecoCriado = enderecoService.save(clienteId, endereco, uriInfo);
 

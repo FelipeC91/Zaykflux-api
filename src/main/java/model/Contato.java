@@ -1,8 +1,9 @@
 package model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotNull;
 
 import java.util.Objects;
 
@@ -13,8 +14,11 @@ public class Contato {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
 
+    @NotNull(message = "Campo Nome deve ser preenchido")
     private String nome;
 
+    @NotNull(message = "Campo E-mail deve ser preenchido")
+    @Email(message = "E-mail em formato inválido")
     private String email;
 
     private String telefone;

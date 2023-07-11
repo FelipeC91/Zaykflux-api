@@ -2,6 +2,7 @@ package model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 
 import java.util.Objects;
 
@@ -11,10 +12,18 @@ public class Endereco {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
+
+    @NotNull(message = "Campo CEP deve ser preenchido")
     private String cep;
+
+    @NotNull(message = "Campo Bairro deve ser preenchido")
     private String bairro;
+
+    @NotNull(message = "Campo Logradouro deve ser preenchido")
     private String logradouro;
     private String complemento;
+
+    @NotNull(message = "Campo Numero deve ser preenchido")
     private Integer numero;
     @ManyToOne
     @JoinColumn(name = "cidade_id")
