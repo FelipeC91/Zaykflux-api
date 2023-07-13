@@ -1,6 +1,5 @@
 package controller;
 
-import com.fasterxml.jackson.databind.util.BeanUtil;
 import dto.ClienteBasicInfoDTO;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.*;

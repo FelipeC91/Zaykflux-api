@@ -56,4 +56,9 @@ INSERT INTO endereco (id, cep, bairro, logradouro, complemento, numero, cidade_i
     (6, '06194060', 'km 18', 'Avenida dos Autonomistas','- de 4334 ao fim - lado par', 6650, 5, 6),
     (7, '08246000', 'Parada XV de Novembro', 'Estrada Itaquera-Guaianases', null, 400, 1, 7);
 
-
+--------------------------------------------
+INSERT INTO grupo (id, nome) VALUES
+	(1, 'Administrador'),
+	(2, 'Financeiro'),
+	(3, 'Intermediário'),
+	(4, 'Técnico');

@@ -8,7 +8,8 @@ import java.util.Objects;
 import java.util.Set;
 
 @Entity
-public class Grupo implements Serializable {
+@Table(name = "area_catalogo")
+public class AreaCatalogo implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
@@ -17,33 +18,33 @@ public class Grupo implements Serializable {
     private String nome;
 
 
+    @OneToMany(mappedBy = "area_catalogo", cascade = CascadeType.ALL)
+    private Set<ItemCatalogo> itemCatalogoSet = new HashSet<>();
 
 
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(
-            name = "grupo_permissao",
-            joinColumns = @JoinColumn(name = "grupo_id"),
-            inverseJoinColumns = @JoinColumn(name = "permissao_id")
-    )
-    private Set<Permissao> permissoes = new HashSet<>();
 
 
-    public Grupo() {
 
+
+
+
+
+
+
+
+
+    public AreaCatalogo() {
     }
 
-    public Grupo(Long id, String nome, Set<Permissao> permissoes) {
+
+
+
+
+    public AreaCatalogo(Long id, String nome, Set<ItemCatalogo> itemCatalogoSet) {
         this.id = id;
         this.nome = nome;
-        this.permissoes = permissoes;
+        this.itemCatalogoSet = itemCatalogoSet;
     }
-
-    public Grupo(Long id, String nome) {
-        this.id = id;
-        this.nome = nome;
-
-    }
-
 
     public Long getId() {
         return id;
@@ -61,21 +62,20 @@ public class Grupo implements Serializable {
         this.nome = nome;
     }
 
-//    public Set<Permissao> getPermissoes() {
-//        return permissoes;
-//    }
-//
-//    public void setPermissoes(Set<Permissao> permissoes) {
-//        this.permissoes = permissoes;
-//    }
+    public Set<ItemCatalogo> getItemCatalogoSet() {
+        return itemCatalogoSet;
+    }
 
+    public void setItemCatalogoSet(Set<ItemCatalogo> itemCatalogoSet) {
+        this.itemCatalogoSet = itemCatalogoSet;
+    }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Grupo grupo = (Grupo) o;
-        return Objects.equals(id, grupo.id);
+        AreaCatalogo that = (AreaCatalogo) o;
+        return Objects.equals(id, that.id);
     }
 
     @Override

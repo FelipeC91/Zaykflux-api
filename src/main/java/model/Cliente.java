@@ -6,9 +6,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 @Entity
 public class Cliente {
@@ -43,8 +41,16 @@ public class Cliente {
 
     @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)
     private List<Endereco> endereco = new ArrayList<>();
-//
-//    private Usuario usuarioCliente;
+
+
+    @ManyToMany
+    @JoinTable(
+            name = "cliente_usuario",
+            joinColumns = @JoinColumn(name = "cliente_id"),
+            inverseJoinColumns = @JoinColumn(name = "usuario_id")
+    )
+    private Set<Usuario> usuarios = new HashSet<>();
+
 
 //    @ManyToMany
 //    private Set<MesaServico> mesaServico;
@@ -54,15 +60,12 @@ public class Cliente {
     public Cliente() {
     }
 
-    public Cliente(Long id, Boolean ativo, String nomeFantasia, String razaoSocial, String cpfCnpj, String fotoUrl, List<Contato> contatos, List<Endereco> endereco) {
-        this.id = id;
-        this.ativo = ativo;
-        this.nomeFantasia = nomeFantasia;
-        this.razaoSocial = razaoSocial;
-        this.cpfCnpj = cpfCnpj;
-        this.fotoUrl = fotoUrl;
-        this.contatos = contatos;
-        this.endereco = endereco;
+    public Set<Usuario> getUsuarios() {
+        return usuarios;
+    }
+
+    public void setUsuarios(Set<Usuario> usuarios) {
+        this.usuarios = usuarios;
     }
 
     public Long getId() {
