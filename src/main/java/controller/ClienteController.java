@@ -2,10 +2,13 @@ package controller;
 
 import dto.ClienteBasicInfoDTO;
 import jakarta.inject.Inject;
+import jakarta.validation.Valid;
 import jakarta.ws.rs.*;
-import jakarta.ws.rs.core.MediaType;
-import jakarta.ws.rs.core.Response;
+import jakarta.ws.rs.core.*;
+import model.Cliente;
+import org.eclipse.microprofile.openapi.annotations.parameters.RequestBody;
 import repository.ClienteRepository;
+import service.ClienteService;
 
 import java.util.List;
 
@@ -15,6 +18,9 @@ public class ClienteController {
     @Inject
     ClienteRepository clienteRepository;
 
+    @Inject
+    ClienteService clienteService;
+
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public List<ClienteBasicInfoDTO> listarClientes() {
@@ -23,7 +29,7 @@ public class ClienteController {
 
 
     @GET
-    @Path("/search")
+    @Path("/busca")
     @Produces(MediaType.APPLICATION_JSON)
     public List<ClienteBasicInfoDTO> listarClientes(@QueryParam("nome") String nomeFilter) {
         return clienteRepository.findByNome(nomeFilter);
@@ -45,5 +51,20 @@ public class ClienteController {
                     .status(Response.Status.NOT_FOUND)
                     .build();
         }
+    }
+
+    @POST
+    @Path("/novo")
+    public Response criarCliente(@RequestBody @Valid Cliente cliente, @Context UriInfo uriInfo) {
+        var clienteNovo = clienteService.save(cliente, uriInfo);
+
+        var locationUrl = UriBuilder.fromUri(uriInfo.getRequestUri())
+                            .path(clienteNovo.getId().toString())
+                            .toTemplate();
+
+        return Response
+                .status(Response.Status.CREATED)
+                .entity(clienteNovo)
+                .build();
     }
 }

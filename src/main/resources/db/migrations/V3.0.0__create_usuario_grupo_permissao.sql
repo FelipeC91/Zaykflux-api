@@ -1,4 +1,4 @@
-CREATE TABLE IF NOT EXISTS usuario WITH ENCODING UTF8 (
+CREATE TABLE IF NOT EXISTS usuario (
     id BIGINT PRIMARY KEY,
     nome VARCHAR(50) NOT NULL,
     email VARCHAR(60) NOT NULL,
@@ -9,14 +9,14 @@ CREATE TABLE IF NOT EXISTS usuario WITH ENCODING UTF8 (
 ------------------------------------------------
 
 
-CREATE TABLE IF NOT EXISTS grupo WITH ENCODING UTF8 (
+CREATE TABLE IF NOT EXISTS grupo (
     id BIGINT PRIMARY KEY,
     nome VARCHAR(50) NOT NULL
 );
 
 ------------------------------------------------
 
-CREATE TABLE IF NOT EXISTS usuario_grupo WITH ENCODING UTF8 (
+CREATE TABLE IF NOT EXISTS usuario_grupo (
     usuario_id BIGINT PRIMARY KEY NOT NULL,
     grupo_id BIGINT NOT NULL,
 

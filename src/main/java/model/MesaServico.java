@@ -16,7 +16,7 @@ public class MesaServico {
 
     private String nome;
 
-    @OneToMany(mappedBy = "mesa_servico", cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL)
     private Set<AreaCatalogo> areaCatalogoSet = new HashSet<>();
 
 

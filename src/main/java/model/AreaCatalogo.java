@@ -18,7 +18,7 @@ public class AreaCatalogo implements Serializable {
     private String nome;
 
 
-    @OneToMany(mappedBy = "area_catalogo", cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL)
     private Set<ItemCatalogo> itemCatalogoSet = new HashSet<>();
 
 

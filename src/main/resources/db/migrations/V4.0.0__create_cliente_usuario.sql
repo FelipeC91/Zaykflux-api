@@ -1,4 +1,4 @@
-CREATE TABLE IF NOT EXISTS cliente_usuario  WITH ENCODING UTF8 (
+CREATE TABLE IF NOT EXISTS cliente_usuario (
     cliente_id BIGINT PRIMARY KEY NOT NULL,
     usuario_id BIGINT NOT NULL,
 

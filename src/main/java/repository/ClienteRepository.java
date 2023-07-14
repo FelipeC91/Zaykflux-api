@@ -7,6 +7,7 @@ import jakarta.enterprise.context.ApplicationScoped;
 import model.Cliente;
 
 import java.util.List;
+import java.util.Optional;
 
 @ApplicationScoped
 public class ClienteRepository implements PanacheRepository<Cliente> {
@@ -28,6 +29,15 @@ public class ClienteRepository implements PanacheRepository<Cliente> {
                 .stream()
                 .map(cliente -> new ClienteBasicInfoDTO(cliente.getId(), cliente.getNomeFantasia(), cliente.getAtivo()) )
                 .toList();
+    }
+
+
+    public Optional<Cliente> findByRazaoSocialOrCpfCnpj(String razaoSocial, String cpfCnpj) {
+        var formattedRazaoSocial = ('%' + razaoSocial + "%").toUpperCase();
+
+        return find("SELECT c FROM Cliente AS c WHERE UPPER(c.razaoSocial) LIKE :razaoSocial OR c.cpfCnpj = :cpfCnpj",
+                Parameters.with("razaoSocial", formattedRazaoSocial).and("cpfCnpj", cpfCnpj) )
+                .firstResultOptional();
     }
 
 

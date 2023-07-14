@@ -40,7 +40,7 @@ public class Cliente {
 
 
     @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)
-    private List<Endereco> endereco = new ArrayList<>();
+    private List<Endereco> enderecos = new ArrayList<>();
 
 
     @ManyToMany
@@ -52,12 +52,30 @@ public class Cliente {
     private Set<Usuario> usuarios = new HashSet<>();
 
 
-//    @ManyToMany
-//    private Set<MesaServico> mesaServico;
-//
+    @ManyToMany
+    @JoinTable(
+            name = "cliente_mesa_servico",
+            joinColumns = @JoinColumn(name = "cliente_id"),
+            inverseJoinColumns = @JoinColumn(name = "mesa_servico_id")
+    )
+    private Set<MesaServico> mesaServicoSet = new HashSet<>();
+
 
 
     public Cliente() {
+    }
+
+    public Cliente(Long id, Boolean ativo, @NotNull(message = "Campo Nome Fantasia deve ser preenchido") String nomeFantasia, @NotNull(message = "Campo Razão Social deve ser preenchido") String razaoSocial, @NotNull(message = "Campo CPF/CNPJ deve ser preenchido") String cpfCnpj, String fotoUrl, List<Contato> contatos, List<Endereco> enderecos, Set<Usuario> usuarios, Set<MesaServico> mesaServicoSet) {
+        this.id = id;
+        this.ativo = ativo;
+        this.nomeFantasia = nomeFantasia;
+        this.razaoSocial = razaoSocial;
+        this.cpfCnpj = cpfCnpj;
+        this.fotoUrl = fotoUrl;
+        this.contatos = contatos;
+        this.enderecos = enderecos;
+        this.usuarios = usuarios;
+        this.mesaServicoSet = mesaServicoSet;
     }
 
     public Set<Usuario> getUsuarios() {
@@ -125,11 +143,11 @@ public class Cliente {
     }
 
     public List<Endereco> getEndereco() {
-        return endereco;
+        return enderecos;
     }
 
     public void setEndereco(List<Endereco> endereco) {
-        this.endereco = endereco;
+        this.enderecos = endereco;
     }
 
     @Override

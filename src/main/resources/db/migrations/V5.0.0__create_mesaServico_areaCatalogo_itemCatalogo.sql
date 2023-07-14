@@ -1,10 +1,10 @@
-CREATE TABLE IF NOT EXISTS mesa_servico WITH ENCODING UTF8 (
+CREATE TABLE IF NOT EXISTS mesa_servico (
     id BIGINT PRIMARY KEY,
     nome VARCHAR(50) NOT NULL
 );
 -------------------------------------------------
 
-CREATE TABLE IF NOT EXISTS area_catalogo WITH ENCODING UTF8 (
+CREATE TABLE IF NOT EXISTS area_catalogo (
     id BIGINT PRIMARY KEY,
     nome VARCHAR(60) NOT NULL,
     mesa_servico_id BIGINT NOT NULL,
@@ -13,7 +13,7 @@ CREATE TABLE IF NOT EXISTS area_catalogo WITH ENCODING UTF8 (
 );
 --------------------------------------------------
 
-CREATE TABLE IF NOT EXISTS item_catalogo WITH ENCODING UTF8 (
+CREATE TABLE IF NOT EXISTS item_catalogo (
     id BIGINT PRIMARY KEY,
     nome VARCHAR(80) NOT NULL,
     area_catalogo_id BIGINT NOT NULL,
