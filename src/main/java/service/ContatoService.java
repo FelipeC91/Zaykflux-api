@@ -22,16 +22,16 @@ public class ContatoService {
     ClienteRepository clienteRepository;
 
     @Transactional
-    public Contato save(Long clienteId, Contato contato, UriInfo uriInfo) {
+    public Contato save(Long clienteId, Contato contato) {
         var clienteOptional = clienteRepository.findByIdOptional(clienteId);
 
         if (clienteOptional.isEmpty())
-            throw new ClienteNonExistentExeception("Cliente inexistente", uriInfo);
+            throw new ClienteNonExistentExeception("Cliente inexistente");
 
        var contatoOptional = contatoRepository. findByEmailAndCliente(contato.getEmail(), clienteId);
 
         if (contatoOptional.isPresent())
-            throw new ContatoAlreadyLinkendWithCliente("Email de contato já vinculado a outro contato deste este cliente", uriInfo);
+            throw new ContatoAlreadyLinkendWithCliente("Email de contato já vinculado a outro contato deste este cliente");
 
 
         contato.setCliente(clienteOptional.get());

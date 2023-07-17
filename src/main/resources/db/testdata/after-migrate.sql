@@ -68,6 +68,6 @@ INSERT INTO mesa_servico (id, nome) VALUES
 	(1, 'Projetos'),
 	(2, 'Remoto'),
 	(3, 'Presencial'),
-	(3, 'Financeiro'),
-	(3, 'Interno'),
-	(4, 'AMPM');
+	(4, 'Financeiro'),
+	(5, 'Interno'),
+	(6, 'AMPM');

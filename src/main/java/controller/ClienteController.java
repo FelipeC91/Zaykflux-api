@@ -56,7 +56,7 @@ public class ClienteController {
     @POST
     @Path("/novo")
     public Response criarCliente(@RequestBody @Valid Cliente cliente, @Context UriInfo uriInfo) {
-        var clienteNovo = clienteService.save(cliente, uriInfo);
+        var clienteNovo = clienteService.save(cliente);
 
         var locationUrl = UriBuilder.fromUri(uriInfo.getRequestUri())
                             .path(clienteNovo.getId().toString())

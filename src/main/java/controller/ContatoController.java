@@ -27,7 +27,7 @@ public class ContatoController {
     @Produces(MediaType.APPLICATION_JSON)
     public Response criarContato(@PathParam("id") Long clienteId, @Valid @RequestBody Contato contato, @Context UriInfo uriInfo){
 
-        var contatoCriado = contatoService.save(clienteId, contato, uriInfo);
+        var contatoCriado = contatoService.save(clienteId, contato);
 
         var locationUri = UriBuilder
                 .fromUri(uriInfo.getRequestUri() + "/" + contatoCriado.getId())

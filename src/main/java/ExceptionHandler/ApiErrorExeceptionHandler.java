@@ -1,22 +1,33 @@
 package ExceptionHandler;
 
+import jakarta.ws.rs.core.Context;
 import jakarta.ws.rs.core.Response;
+import jakarta.ws.rs.core.UriInfo;
 import jakarta.ws.rs.ext.ExceptionMapper;
 import jakarta.ws.rs.ext.Provider;
 import service.exception.ApiErrorException;
 
 import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 
 @Provider
 public class ApiErrorExeceptionHandler implements ExceptionMapper<ApiErrorException> {
 
+    @Context
+    UriInfo uriInfo;
+
     @Override
     public Response toResponse(ApiErrorException e) {
-        var apiError = new ApiError(e.getUri().getPath(),
-                                        e.getMessage(), Response.Status.NOT_ACCEPTABLE, LocalDateTime.now());
+        var apiError = new ApiError(uriInfo.getAbsolutePath().toString(),
+                                        400,
+                                         Response.Status.BAD_REQUEST,
+                                        OffsetDateTime.now(),
+                                        e.getMessage(),
+                                        e.getCause()
+                );
 
         return Response
-                .status(Response.Status.NOT_ACCEPTABLE)
+                .status(Response.Status.BAD_REQUEST)
                 .entity(apiError)
                 .build();
     }

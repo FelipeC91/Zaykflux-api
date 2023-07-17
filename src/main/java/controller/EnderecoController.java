@@ -27,7 +27,7 @@ public class EnderecoController {
     @Produces(MediaType.APPLICATION_JSON)
     public Response criarEndereco(@PathParam("id") Long clienteId, @RequestBody @Valid Endereco endereco, @Context UriInfo uriInfo) {
 
-        var enderecoCriado = enderecoService.save(clienteId, endereco, uriInfo);
+        var enderecoCriado = enderecoService.save(clienteId, endereco);
 
         var locationUri = UriBuilder
                                 .fromUri(uriInfo.getRequestUri() + "/" + enderecoCriado.getId())

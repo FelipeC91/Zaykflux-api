@@ -1,6 +1,7 @@
 package model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
@@ -23,6 +24,7 @@ public class Usuario implements Serializable {
     @Column(name = "data_cadastro")
     private LocalDate dataCadastro;
 
+    @JsonIgnore
     private String senha;
 
     @ManyToMany(cascade = CascadeType.ALL)

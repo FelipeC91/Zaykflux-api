@@ -2,26 +2,20 @@ package service.exception;
 
 import jakarta.ws.rs.core.UriInfo;
 
-public class ApiErrorException extends RuntimeException{
-
-    private UriInfo uri;
-
-    public ApiErrorException(String message, UriInfo uri) {
+public class ApiErrorException extends RuntimeException {
+    public ApiErrorException(String message) {
         super(message);
-        this.uri = uri;
     }
 
-    public ApiErrorException(String message, Throwable cause, UriInfo uri) {
-        super(message, cause); this.uri = uri;
+    public ApiErrorException(String message, Throwable cause) {
+        super(message, cause);
     }
 
-    public ApiErrorException(Throwable cause, UriInfo uri) {
-        super(cause); this.uri = uri;
+    public ApiErrorException(Throwable cause) {
+        super(cause);
     }
 
-     public UriInfo getUri() {return uri;}
-
-
-
-
+    public ApiErrorException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
+        super(message, cause, enableSuppression, writableStackTrace);
+    }
 }

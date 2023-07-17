@@ -25,11 +25,11 @@ public class EnderecoService {
 
 
     @Transactional
-    public Endereco save(Long clienteId, Endereco endereco, UriInfo uriInfo) {
+    public Endereco save(Long clienteId, Endereco endereco) {
        var clienteOptional = clienteRepository.findByIdOptional(clienteId);
 
         if (clienteOptional.isEmpty())
-            throw new ClienteNonExistentExeception("Cliente inexistente", uriInfo);
+            throw new ClienteNonExistentExeception("Cliente inexistente");
 
 
         System.out.println(endereco.toString());
