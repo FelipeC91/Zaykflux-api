@@ -57,5 +57,6 @@ public class CreateNewAppointmentUseCase implements UseCase<AppointmentInputDTO,
         var possibleAppointment = ticketRepository.findByAppointment_AccountableAnd_DateAnd_BeginningAtLessThanEqualAnd_EndingAtGreaterThanEqual(appointment);
 
         return  possibleAppointment > 0;
+//        return ticketRepository.findExistsByAppointment_AccountableAnd_DateAnd_BeginningAtLessThanEqualAnd_EndingAtGreaterThanEqual(appointment);
     }
 }

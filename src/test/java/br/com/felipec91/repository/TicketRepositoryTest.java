@@ -1,5 +1,6 @@
 package br.com.felipec91.repository;
 
+import br.com.felipec91.domain.exception.TicketNotFoundException;
 import br.com.felipec91.domain.model.ticket.value_object.Appointment;
 import br.com.felipec91.infrastructure.db.repositoryImpl.TicketRepositoryImpl;
 import br.com.felipec91.infrastructure.db.repositoryImpl.UserModelRepositoryImpl;
@@ -23,7 +24,7 @@ class TicketRepositoryTest {
     UserModelRepositoryImpl userModelRepository;
 
     @Test
-    void givenAnExistentTicketNumber_whenFindByNumber_thenFindTicket() {
+    void givenAnExistentTicketNumber_whenFindByNumber_thenShouldFindTicket() {
         var existentTickerNumber = 1L;
         var existentTicketTitle = "LOJA AÇAILAND";
 
@@ -34,7 +35,7 @@ class TicketRepositoryTest {
     }
 
     @Test
-    void givenAnSearchKeyWord_whenFindByTitleOrCustomerTradingName_thenFindTicket() {
+    void givenAnSearchKeyWord_whenFindByTitleOrCustomerTradingName_thenShouldFindTicket() {
         var validTitleSearchKey = "LOJA AÇAILAND";
         var validCustomerNameSearchKey = "JAND"; //...AIA
 
@@ -48,17 +49,8 @@ class TicketRepositoryTest {
     }
 
     @Test
-    void findByAppointment_AccountableAnd_DateAnd_BeginningAtLessThanEqualAnd_EndingAtGreaterThanEqual() {
-        var userModel = userModelRepository.findById(UUID.fromString("2665c568-abf6-458e-8801-658fa16ae552"));
-        var existentAppointment = Appointment.create(
-                        LocalDate.of(2023,12,19),
-                        OffsetTime.of(LocalTime.of(13,30,0), ZoneOffset.of("-03:00")),
-                        OffsetTime.of(LocalTime.of(14,30,0), ZoneOffset.of("-03:00")),
-                "Realizamos nova visita à loja para nova avaliação. Quanto as duas câmera que não funcionam:\\n1. Uma delas (9) não foi instalada mas tem seu cabeamento passado até a beer\\ncave. Beer cave esta que, no momento da entrega da loja, não existia.  Ou seja: neste setor será necessária a instalação de nova câmera.\\n2. Nesta (2), localizada na entrada da loja, identificamos em testes que o cabo que a leva até o local está danificado em algum ponto da passagem.\\nSerá necessária nova visita para atuar nesta pendências.",
-                        userModel
-        );
-
-
+    void findByAppointment_AccountableAnd_DateAnd_BeginningAtLessThanEqualAnd_EndingAtGreaterThanEqual_thenShouldFindOne() {
+        var existentAppointment = underTest.findById(UUID.fromString("5249812b-e8f9-480d-a8db-2ded686dee6b")).getAppointments().get(0);
 
         Long possibleAppointment = underTest.findByAppointment_AccountableAnd_DateAnd_BeginningAtLessThanEqualAnd_EndingAtGreaterThanEqual(existentAppointment);
 

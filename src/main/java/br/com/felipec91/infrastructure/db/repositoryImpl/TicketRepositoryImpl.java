@@ -57,8 +57,8 @@ public class TicketRepositoryImpl implements TicketRepository {
                             SELECT t FROM Ticket AS t JOIN t.appointments AS a
                                     WHERE a.accountable.id = :accountableId
                                         AND a.appointmentDate = :appointmentDate
-                                        AND (a.beginningAt >= :beginningAt AND a.endingAt <=  :beginningAt)
-                                        OR (a.beginningAt >= :endingAt AND a.endingAt <= :endingAt)
+                                        AND :beginningAt BETWEEN a.beginningAt AND a.endingAt
+                                        OR :endingAt BETWEEN a.beginningAt AND a.endingAt
                         """,
                         Parameters.with("accountableId", anAppointment.getAccountable().getId())
                                 .and("appointmentDate", anAppointment.getAppointmentDate())
@@ -74,19 +74,17 @@ public class TicketRepositoryImpl implements TicketRepository {
 //                                        THEN true
 //                                        ELSE false
 //                                    END
-//                            FROM Appointment AS a
-//                                    WHERE a.accountable.id = :accountableId
-//                                        AND a.appointmentDate = :appointmentDate
-//                                        AND (a.beginningAt >= :beginningAt AND a.endingAt <=  :beginningAt)
-//                                        OR (a.beginningAt >= :endingAt AND a.endingAt <= :endingAt)
-//                        """, Boolean.class
-//                    )
+//                        FROM  appointment AS a
+//                            WHERE a.user_model_id = :accountableId
+//                            AND a.appointment_date = :appointmentDate
+//                            AND :beginningAt BETWEEN a.beginning_at AND a.ending_at
+//                            OR :endingAt BETWEEN a.beginning_at AND a.ending_at
+//                    """, Boolean.class)
 //                    .setParameter("accountableId", anAppointment.getAccountable().getId())
 //                    .setParameter("appointmentDate", anAppointment.getAppointmentDate())
 //                    .setParameter("beginningAt", anAppointment.getBeginningAt())
 //                    .setParameter("endingAt", anAppointment.getEndingAt())
 //                    .getSingleResult();
-//
 //    }
 
     public List<Ticket> findByCriteriaFilter(TicketAdvancedSearchQueryFilter  filter) {

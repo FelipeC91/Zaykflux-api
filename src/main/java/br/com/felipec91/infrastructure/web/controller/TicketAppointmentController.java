@@ -2,6 +2,7 @@ package br.com.felipec91.infrastructure.web.controller;
 
 
 import br.com.felipec91.application.use_case.CreateNewAppointmentUseCase;
+import br.com.felipec91.domain.exception.TicketNotFoundException;
 import br.com.felipec91.domain.repository.TicketRepository;
 import br.com.felipec91.infrastructure.web.dto.appointment.AppointmentInputDTO;
 import jakarta.inject.Inject;
@@ -25,11 +26,12 @@ public class TicketAppointmentController {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Response listAll(@PathParam("ticketId") UUID ticketId) {
-        var appointments = ticketRepository.findById(ticketId).getAppointments();
+        var ticket = ticketRepository.findByIdOptional(ticketId)
+                                            .orElseThrow(() -> new TicketNotFoundException("Ticket não encontrado"));
 
         return Response
                 .status(Response.Status.OK)
-                .entity(appointments)
+                .entity(ticket.getAppointments())
                 .build();
     }
 
