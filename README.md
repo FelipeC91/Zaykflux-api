@@ -35,7 +35,7 @@ Em linhas gerais, suas funcionalidades abordam as seguintes possibilidades:
 
 ## Technologies----------------------------------
 
-
+![UML](https://github.com/FelipeC91/Zaykflux-api/blob/master/uml-z-flux.jpeg)
 This project uses Quarkus, the Supersonic Subatomic Java Framework.
 
 If you want to learn more about Quarkus, please visit its website: https://quarkus.io/ .
